@@ -2,7 +2,7 @@
 A simple chat application to fiddle around with socket.io
 
 ## How to run
-####Requirements:
+#### Requirements:
 - node
 - npm
 
