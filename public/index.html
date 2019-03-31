@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Socket.io chat app | login</title>
+  <link rel="stylesheet" href="/css/bulma.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
+
+
+<section id="login-screen" class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <h1 class="title is-size-2">
+            a socket.io chat application
+          </h1>
+          <h2 class="subtitle is-size-4">
+            by <strong>raimond lume</strong> 2019
+          </h2>
+        </div>
+        <div class="column">
+          <div class="field has-addons">
+            <div class="control">
+              <input id="username" class="input is-medium" type="text" placeholder="Username">
+            </div>
+            <div class="control">
+              <a id="user-login" class="button is-primary is-outlined is-medium">
+                Enter
+              </a>
+            </div>
+          </div>
+          <p id="username-taken" class="help is-danger" style="display: none;">Username is taken!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="chat-screen" class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-10">
+          <table class="table is-fullwidth is-dark">
+            <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th>
+                Message
+              </th>
+              <th>
+                Time
+              </th>
+            </tr>
+            </thead>
+            <tbody id="message-table">
+            </tbody>
+          </table>
+          <div class="field has-addons">
+            <div class="control">
+              <input id="message" class="input is-medium" type="text" placeholder="message">
+            </div>
+            <div class="control">
+              <a id="message-send" class="button is-primary is-outlined is-medium">
+                Send
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="column is-2">
+          <table class="table is-dark">
+            <thead>
+            <tr>
+              <th>
+                Users
+              </th>
+            </tr>
+            </thead>
+            <tbody id="user-table">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
