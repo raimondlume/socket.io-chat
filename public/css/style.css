@@ -51,6 +51,7 @@
 
 .message-text p {
     word-break: break-word;
+    white-space: pre-wrap;
 }
 
 .message-bubble {

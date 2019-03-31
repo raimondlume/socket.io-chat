@@ -27,6 +27,12 @@ $(function() {
     return false;
   });
 
+  $("#username").keyup(function (event) {
+    if (event.which === 13) {
+      $('#user-login').click(); // enter functionality
+    }
+  });
+
   $("#message-send").click(function(e) {
     e.preventDefault();// prevents page reloading
     let $message = $('#message');
@@ -34,6 +40,7 @@ $(function() {
     if (messageText.length < 1) return;
     $message.val("");
     socket.emit("message", messageText);
+    socket.emit('user typing', false); // remove 'typing...' after message sent
   });
 
   socket.on('user joined', function (username) {
@@ -58,10 +65,14 @@ $(function() {
     $('#message-table').append(tableRow);
   });
 
-  $('#message').keyup(function () {
+  $('#message').keyup(function (event) {
     socket.emit('user typing', true);
     clearTimeout(timeout);
-    timeout = setTimeout(timeoutCallback, 3000)
+    timeout = setTimeout(timeoutCallback, 3000);
+
+    if (event.which === 13 && !event.shiftKey) {
+      $('#message-send').click(); // send on enter, new line with shift + enter
+    }
   });
 
   socket.on('user typing', function (data) {
