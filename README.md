@@ -15,4 +15,4 @@ Start server
 ```
 node index.js
 ```
-Server is now running at localhost:3000!
+Server is now running at ```localhost:3000```!
