@@ -2,6 +2,7 @@ let express = require('express');
 let app = express();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+let port = 3000;
 
 // serve bulma css file from node_modules
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css/'));
@@ -45,6 +46,6 @@ io.on('connection', function (socket) {
   })
 });
 
-http.listen(3000, function () {
-  console.log('listening on *:3000')
+http.listen(port, function () {
+  console.log(`Server started at localhost:${port}`)
 });

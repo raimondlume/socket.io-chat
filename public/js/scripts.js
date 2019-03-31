@@ -6,9 +6,15 @@ $(function() {
   $("#chat-screen").hide();
 
   $("#user-login").click(function(e) {
+    $("#username-empty").hide();
+    $("#username-taken").hide();
+
     e.preventDefault(); // prevents page reloading
     let username = $("#username").val().trim();
-    if (username.length < 1) return false;
+    if (username.length < 1) {
+      $("#username-empty").show();
+      return false;
+    }
 
     users = getUsers();
     if (users.includes(username)) {
