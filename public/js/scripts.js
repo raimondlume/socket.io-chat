@@ -1,7 +1,8 @@
 $(function() {
   let socket = io();
   let users = [];
-  let timeout;
+  let typingTimeout;
+  let titleTimeout;
 
   $("#chat-screen").hide();
 
@@ -63,12 +64,21 @@ $(function() {
       .append($('<td>').append(`${text}`))
       .append($('<td>').append(`${currentDate}`));
     $('#message-table').append(tableRow);
+
+    // display latest message in tab title for 3 seconds
+    document.title = `${user}: ${text}`;
+    clearTimeout(titleTimeout);
+    titleTimeout = setTimeout(titleCallback, 3000);
   });
+
+  function titleCallback() {
+    document.title = 'Socket.io chat | Raimond Lume';
+  }
 
   $('#message').keyup(function (event) {
     socket.emit('user typing', true);
-    clearTimeout(timeout);
-    timeout = setTimeout(timeoutCallback, 3000);
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(timeoutCallback, 3000);
 
     if (event.which === 13 && !event.shiftKey) {
       $('#message-send').click(); // send on enter, new line with shift + enter
