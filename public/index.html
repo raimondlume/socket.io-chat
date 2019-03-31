@@ -6,6 +6,8 @@
   <title>Socket.io chat app | login</title>
   <link rel="stylesheet" href="/css/bulma.css"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
 <script src="/socket.io/socket.io.js"></script>
@@ -46,47 +48,28 @@
   <div class="hero-body">
     <div class="container">
       <div class="columns">
-        <div class="column is-10">
-          <table class="table is-fullwidth is-dark">
-            <thead>
-            <tr>
-              <th>
-                Name
-              </th>
-              <th>
-                Message
-              </th>
-              <th>
-                Time
-              </th>
-            </tr>
-            </thead>
-            <tbody id="message-table">
-            </tbody>
-          </table>
-          <div class="field has-addons">
-            <div class="control">
-              <input id="message" class="input is-medium" type="text" placeholder="message">
-            </div>
-            <div class="control">
-              <a id="message-send" class="button is-primary is-outlined is-medium">
-                Send
-              </a>
+        <div class="column is-8">
+          <div class="message-container">
+          </div>
+          <div class="input-container">
+            <div class="columns">
+              <div class="column is-10">
+                <textarea id="message" class="textarea" placeholder="Hi!" rows="2"></textarea>
+              </div>
+              <div class="column">
+                <a id="message-send" class="button is-primary is-outlined is-medium">
+                  Send
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="column is-2">
-          <table class="table is-dark">
-            <thead>
-            <tr>
-              <th>
-                Users
-              </th>
-            </tr>
-            </thead>
-            <tbody id="user-table">
-            </tbody>
-          </table>
+        <div class="column">
+          <div class="users-container is-hidden-mobile">
+            <h2 class="title">Users</h2>
+            <div id="user-table">
+            </div>
+          </div>
         </div>
       </div>
     </div>

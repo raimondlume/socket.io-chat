@@ -1,6 +1,7 @@
 $(function() {
   let socket = io();
   let users = [];
+  let timeout;
 
   $("#chat-screen").hide();
 
@@ -30,26 +31,44 @@ $(function() {
   });
 
   socket.on('user joined', function (username) {
-    console.log(`${username} joined`);
     renderUserTable();
   });
 
   socket.on('user left', function (username) {
-    console.log(`${username} left`);
     renderUserTable();
   });
 
   socket.on('message', function (messageData) {
-    console.log("got message");
     let user = messageData.user;
     let text = messageData.text;
-    let currentDate = new Date().toLocaleString();
+    let currentDate = new Date().toLocaleTimeString();
+
+    createMessageBubble(user, text, currentDate);
+
     let tableRow = $('<tr>')
       .append($('<td>').append(`${user}`))
       .append($('<td>').append(`${text}`))
       .append($('<td>').append(`${currentDate}`));
     $('#message-table').append(tableRow);
   });
+
+  $('#message').keyup(function () {
+    socket.emit('user typing', true);
+    clearTimeout(timeout);
+    timeout = setTimeout(timeoutCallback, 3000)
+  });
+
+  socket.on('user typing', function (data) {
+    if (data.typing) {
+      $(`#${data.username}`).show()
+    } else {
+      $(`#${data.username}`).hide()
+    }
+  });
+
+  function timeoutCallback() {
+    socket.emit('user typing', false);
+  }
 
   function getUsers() {
     let res = [];
@@ -71,8 +90,28 @@ $(function() {
     userTable.empty();
     users = getUsers();
     users.forEach(function (value, index) {
-      let tableRow = $('<tr>').append($('<td>').append(value));
-      userTable.append(tableRow);
+      let userRow = $('<div>')
+        .append($('<i>').addClass("far fa-user"))
+        .append($('<span>').append(value).addClass('user-table-text'))
+        .append($('<span>').append('<i>is typing...</i>').attr('id', value).addClass('is-typing-label'));
+      userTable.append(userRow);
     })
+  }
+
+  function createMessageBubble(user, text, time) {
+    let $messageContainer = $('.message-container');
+
+    let messageDiv = $('<div>');
+    let userLabel = $('<span>').append(`<strong>${user}</strong> <i>at ${time}</i>`);
+    let textContainer = $('<div>').append(`<p>${text}</p>`);
+
+    messageDiv.addClass('message-bubble');
+    userLabel.addClass('message-sender');
+    textContainer.addClass('message-text');
+
+    messageDiv.append(userLabel);
+    messageDiv.append(textContainer);
+
+    $messageContainer.prepend(messageDiv);
   }
 });

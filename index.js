@@ -38,6 +38,10 @@ io.on('connection', function (socket) {
     console.log('message: ' + msg);
     // socket.broadcast.emit('chat message', msg);
     io.emit('message', {user: socket.username, text: msg});
+  });
+
+  socket.on('user typing', function (isTyping) {
+    io.emit('user typing', { username: socket.username, typing: isTyping});
   })
 });
 
