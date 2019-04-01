@@ -4,7 +4,9 @@ let http = require('http').Server(app);
 let io = require('socket.io')(http);
 let port = 3000;
 
-let md = require('markdown-it')();
+let md = require('markdown-it')({
+  linkify: true
+});
 
 // serve bulma css file from node_modules
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css/'));
