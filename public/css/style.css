@@ -43,10 +43,21 @@
 .message-text {
     padding: 0.7rem;
     width: fit-content;
+    width: -moz-fit-content;
     background: turquoise;
     border-radius: 1rem;
     color: white;
     font-size: 1.2em;
+}
+
+.client-message .message-text {
+    background: dodgerblue;
+}
+
+@media (max-width: 1300px) {
+    .client-message {
+        direction: rtl;
+    }
 }
 
 .message-text p {

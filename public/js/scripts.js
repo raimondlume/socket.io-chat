@@ -3,6 +3,7 @@ $(function() {
   let users = [];
   let typingTimeout;
   let titleTimeout;
+  let clientUsername;
 
   $("#chat-screen").hide();
 
@@ -25,6 +26,7 @@ $(function() {
     socket.emit("user joined", username);
     $("#login-screen").hide();
     $("#chat-screen").show();
+    clientUsername = username;
     return false;
   });
 
@@ -135,6 +137,7 @@ $(function() {
     messageDiv.addClass('message-bubble');
     userLabel.addClass('message-sender');
     textContainer.addClass('message-text');
+    if (user === clientUsername) messageDiv.addClass('client-message');
 
     messageDiv.append(userLabel);
     messageDiv.append(textContainer);
