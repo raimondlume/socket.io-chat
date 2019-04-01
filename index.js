@@ -4,6 +4,8 @@ let http = require('http').Server(app);
 let io = require('socket.io')(http);
 let port = 3000;
 
+let md = require('markdown-it')();
+
 // serve bulma css file from node_modules
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css/'));
 // serve public html/js files
@@ -37,8 +39,8 @@ io.on('connection', function (socket) {
 
   socket.on('message', function (msg) {
     console.log('message: ' + msg);
-    // socket.broadcast.emit('chat message', msg);
-    io.emit('message', {user: socket.username, text: msg});
+    let mdText = md.render(msg);
+    io.emit('message', {user: socket.username, text: mdText});
   });
 
   socket.on('user typing', function (isTyping) {

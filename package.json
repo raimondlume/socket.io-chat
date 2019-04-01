@@ -22,6 +22,7 @@
   "dependencies": {
     "bulma": "^0.7.4",
     "express": "^4.16.4",
+    "markdown-it": "^8.4.2",
     "socket.io": "^2.2.0"
   }
 }
