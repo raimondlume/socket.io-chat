@@ -40,7 +40,7 @@ io.on('connection', function (socket) {
   socket.on('message', function (msg) {
     console.log('message: ' + msg);
     let mdText = md.render(msg);
-    io.emit('message', {user: socket.username, text: mdText});
+    io.emit('message', {user: socket.username, parsedText: mdText, plaintext: msg});
   });
 
   socket.on('user typing', function (isTyping) {

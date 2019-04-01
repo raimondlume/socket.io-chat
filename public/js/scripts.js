@@ -56,7 +56,7 @@ $(function() {
 
   socket.on('message', function (messageData) {
     let user = messageData.user;
-    let text = messageData.text;
+    let text = messageData.parsedText;
     let currentDate = new Date().toLocaleTimeString();
 
     createMessageBubble(user, text, currentDate);
@@ -68,7 +68,7 @@ $(function() {
     $('#message-table').append(tableRow);
 
     // display latest message in tab title for 3 seconds
-    document.title = `${user}: ${text}`;
+    document.title = `${user}: ${messageData.plaintext}`;
     clearTimeout(titleTimeout);
     titleTimeout = setTimeout(titleCallback, 3000);
   });
