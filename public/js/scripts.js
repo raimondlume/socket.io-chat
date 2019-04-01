@@ -142,6 +142,7 @@ $(function() {
     messageDiv.append(userLabel);
     messageDiv.append(textContainer);
 
-    $messageContainer.prepend(messageDiv);
+    $messageContainer.append(messageDiv);
+    $messageContainer.scrollTop($messageContainer.prop("scrollHeight"));
   }
 });

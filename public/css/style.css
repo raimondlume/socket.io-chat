@@ -17,7 +17,7 @@
     border-radius: 2rem;
     overflow-y: auto;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .users-container {
@@ -66,7 +66,14 @@
 }
 
 .message-bubble {
-    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+@-moz-document url-prefix() {
+    .message-bubble {
+        padding-bottom: 1rem;
+        padding-top: 0 !important;
+    }
 }
 
 .fa-user, .user-table-text, .is-typing-label {
