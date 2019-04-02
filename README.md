@@ -1,5 +1,6 @@
 # socket.io-chat
-A simple chat application to fiddle around with socket.io
+A simple chat application to fiddle around with socket.io.\
+Live demo: https://socket-io-chat-raimondl.herokuapp.com/
 
 ## How to run
 #### Requirements:
