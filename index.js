@@ -27,7 +27,7 @@ io.on('connection', function (socket) {
   console.log('a user connected');
 
   socket.on('user joined', function (username) {
-    socket.username = md.render(username);
+    socket.username = username;
     console.log(`${socket.username} joined!`);
     users.push(socket.username);
     io.emit('user joined', socket.username);
